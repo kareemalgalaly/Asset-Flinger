@@ -106,7 +106,7 @@ def drawMenuItem(item, x, y, width, height):
     bgl.glTexParameteri(bgl.GL_TEXTURE_2D, bgl.GL_TEXTURE_MIN_FILTER, bgl.GL_NEAREST)
     bgl.glTexParameteri(bgl.GL_TEXTURE_2D, bgl.GL_TEXTURE_MAG_FILTER, bgl.GL_NEAREST) #GL_LINEAR seems to be used in Blender for background images
     bgl.glEnable(bgl.GL_TEXTURE_2D)
-    bgl.glBlendFunc(bgl.GL_SRC_ALPHA, bgl.GL_ONE_MINUS_SRC_ALPHA)
+    bgl.glBlendFunc(bgl.GL_SRC_ALP      HA, bgl.GL_ONE_MINUS_SRC_ALPHA)
 
     bgl.glColor4f(1,1,1,1)
     bgl.glBegin(bgl.GL_QUADS)
@@ -366,7 +366,7 @@ class AssetFlingerMenu(bpy.types.Operator):
                 iconFile = os.path.join(libraryIconsPath, "folder.png")
                 menuItem['icon'] = bpy.data.images.load(filepath = iconFile)
                 self.imageList.append(menuItem['icon'].filepath_raw)
-                menuItem['text'] = addon_prefs.custom_library_path
+                menuItem['text'] = addon_prefs.custom_library_path.split("\\")[-2]
                 menuItem['isFolder'] = True
                 self.current_dir_content.append(menuItem)
 
